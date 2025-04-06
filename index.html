@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Story</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="aboutme.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-white text-dark">
+    <header class="d-flex justify-content-between align-items-center p-4">
+      <div class="h2 font-weight-bold text-success judul">MY STORY</div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="aboutme.html" class="nav-link">About Me</a>
+        <a href="#" class="nav-link">Soon</a>
+      </nav>
+    </header>
+    <main id="content" class="p-4">
+      <section class="d-flex flex-column flex-lg-row align-items-center">
+        <div class="col-lg-5 mb-4 textkiri">
+          <h6 class="text-muted">a little about me</h6>
+          <h1 class="display-5 font-weight-bold text-success">HI I'M <span class="text-warning">DENI ARYA WINALDI</span></h1>
+          <p class="lead text-muted">
+            Hi there! I’m a student at an Islamic university in Bukittinggi. I’m a passionate programmer who loves exploring the world of technology — Currently, I’m diving into Web3 and blockchain technology, and I’m deeply fascinated by
+            its potential to reshape the future of the internet. Keep learning.
+          </p>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end gambarkanan">
+          <img alt="Illustration of a man and woman cycling through a vineyard with grapevines and aronia berries around them" class="img-fluid" src="image/gambar1.jpg" />
+        </div>
+      </section>
+      <section class="mt-4 d-flex flex-column flex-lg-row align-items-center">
+        <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start gambarbawah ml-3">
+          <a href="https://www.facebook.com/deni.arya.716195/" target="_blank">
+            <img alt="Facebook Logo" class="img-fluid socialakun" src="logo/facebook.png" style="width: 30px; margin: 0 20px" />
+          </a>
+          <a href="https://www.instagram.com/deni_aryaa/" target="_blank">
+            <img alt="Instagram Logo" class="img-fluid socialakun" src="logo/instagram.png" style="width: 30px; margin: 0 20px" />
+          </a>
+          <a href="https://www.tiktok.com/@caidenn21?is_from_webapp=1&sender_device=pc" target="_blank">
+            <img alt="TikTok Logo" class="img-fluid socialakun" src="logo/tik-tok.png" style="width: 30px; margin: 0 20px" />
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Fungsi untuk memuat konten halaman
+      async function loadPage(url) {
+        try {
+          const response = await fetch(url);
+          const html = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, "text/html");
+          const newContent = doc.querySelector("main").innerHTML;
+
+          document.getElementById("content").innerHTML = newContent;
+          window.scrollTo(0, 0);
+
+          // Update active state
+          document.querySelectorAll(".nav-link").forEach((link) => {
+            link.classList.remove("active");
+            if (link.href.endsWith(url)) link.classList.add("active");
+          });
+        } catch (error) {
+          console.error("Gagal memuat halaman:", error);
+          document.getElementById("content").innerHTML = `
+            <div class="alert alert-danger mt-4">
+              Gagal memuat halaman: ${error.message}
+            </div>
+          `;
+        }
+      }
+
+      // Handle initial load
+      document.addEventListener("DOMContentLoaded", () => {
+        // Load content based on current URL
+        const initialPage = window.location.pathname.split("/").pop() || "index.html";
+        loadPage(initialPage);
+
+        // Navigation handler
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const href = link.getAttribute("href");
+            if (href !== "#") {
+              history.pushState({}, "", href);
+              loadPage(href);
+            }
+          });
+        });
+
+        // Handle browser navigation
+        window.addEventListener("popstate", () => {
+          const page = window.location.pathname.split("/").pop() || "index.html";
+          loadPage(page);
+        });
+      });
+
+      // Card interaction
+      // Portfolio Modal Handler
+      document.addEventListener("DOMContentLoaded", function () {
+        $("#portfolioModal").on("show.bs.modal", function (event) {
+          const button = $(event.relatedTarget);
+          const card = button.closest(".card");
+
+          const title = card.find("h3").text();
+          const image = card.find("img").attr("src");
+          const description = card.find(".card-text").text();
+
+          const modal = $(this);
+          modal.find("#modalTitle").text(title);
+          modal.find("#modalProjectTitle").text(title);
+          modal.find("#modalImage").attr("src", image);
+          modal.find("#modalProjectDesc").text(description);
+        });
+      });
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

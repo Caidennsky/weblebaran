@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+header {
+  margin-top: -20px;
+}
+.judul {
+  margin-top: 10px;
+}
+.gambarkanan {
+  position: absolute;
+  width: 500px;
+  top: 130px;
+  right: 0px;
+}
+
+.gambarkanan img {
+  margin-right: 50px;
+}
+.textkiri {
+  margin-top: 100px;
+  margin-left: 50px;
+}
+.textkiri p {
+  text-align: justify;
+}
+nav a {
+  text-decoration: none;
+  color: black;
+  margin: 0px 20px 0px 20px;
+}
+nav a:hover {
+  color: orange !important;
+  text-decoration: none;
+}
+
+.gambarbawah {
+  position: relative;
+  top: 80px;
+  /* border: 5px solid black; */
+}
+
+.akunsaya h5 {
+  position: absolute;
+  bottom: 110px;
+  margin-left: 50px;
+}
+
+.socialakun {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.socialakun:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link {
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link.active {
+  color: orange !important;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: orange;
+  transition: all 0.3s ease;
+}
+
+/* Tambahkan ini di style.css */
+#content {
+  transition: opacity 0.3s ease;
+}
+
+.nav-link.active {
+  color: orange !important;
+  position: relative;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: orange;
+  transition: all 0.3s ease;
+}
